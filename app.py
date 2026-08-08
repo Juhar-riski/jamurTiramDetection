@@ -9,7 +9,6 @@ import re
 import time
 from pathlib import Path
 
-import pandas as pd
 import streamlit as st
 import torch
 import torch.nn as nn
@@ -25,7 +24,7 @@ YOLO_PATH = BASE_DIR / "models" / "yoloModel.pt"
 CLASS_NAMES = {0: "Belum Layak Panen", 1: "Layak Panen"}
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-IMG_SIZE = 224
+IMG_SIZE = 640
 PREPROCESS = transforms.Compose(
     [
         transforms.Resize((IMG_SIZE, IMG_SIZE)),
@@ -338,7 +337,7 @@ div.stButton > button {
     color: white;
 }
 div.stButton > button:hover {
-    background: linear-gradient(135deg, #4a8be5, #3a6fb3);
+    background: linear-gradient(135deg, #5a9bf5, #4b7fc3);
     color: white;
 }
 
@@ -365,7 +364,6 @@ def render_cnn_card(result):
     label = result["label"]
     is_layak = "Belum" not in label
     badge_class = "badge-layak" if is_layak else "badge-belum"
-    bar_color = confidence_color(label)
 
     rows_html = ""
     for cls_label, pct in sorted(result["probs"].items(), key=lambda x: -x[1]):

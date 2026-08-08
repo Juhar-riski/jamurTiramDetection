@@ -104,6 +104,7 @@ def predict_yolo(model, pil_image: Image.Image):
 
 # Tampilan / styling
 st.set_page_config(
+    page_icon= "./logo Unimal.png",
     page_title="Perbandingan Model CNN & YOLO",
     layout="wide",
 )
@@ -117,7 +118,7 @@ html, body, [class*="css"]  {
 }
 
 .stApp {
-    background: radial-gradient(circle at 10% 0%, #1b1f2a 0%, #0e1117 45%, #0a0c10 100%);
+    background: radial-gradient(circle at 10% 0%, #1b1f2a 10%, #0e1117 30%, #0a0c10 100%);
     color: #e6e6e6;
 }
 
@@ -128,7 +129,6 @@ html, body, [class*="css"]  {
     max-width: 1100px;
 }
 
-/* --- TAMBAHAN: samakan tinggi antar kolom (versi lengkap) --- */
 div[data-testid="stHorizontalBlock"] {
     align-items: stretch;
 }
@@ -153,23 +153,22 @@ div[data-testid="stMarkdownContainer"] {
     width: 100%;
     height: 100%;
 }
-/* --- akhir tambahan --- */
 
 .hero {
     padding: 1.6rem 1.8rem;
-    border-radius: 18px;
+    border-radius: 20px;
     background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
     border: 1px solid rgba(255,255,255,0.07);
     margin-bottom: 1.6rem;
 }
 .hero h1 {
     margin: 0;
-    font-size: 1.7rem;
+    font-size: 1.76rem;
     font-weight: 700;
     color: #f4f4f4;
 }
 .hero p {
-    margin: 0.4rem 0 0 0;
+    margin: 0rem 0 0 0;
     color: #9aa3b2;
     font-size: 0.95rem;
 }
@@ -185,6 +184,25 @@ div[data-testid="stMarkdownContainer"] {
     flex-direction: column;
 }
 .card h3 {
+    margin-top: 0;
+    font-size: 1.05rem;
+    color: #d8dde6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.previewYolo {
+    border-radius: 1px;
+    padding: 1.25rem 1.4rem;
+    background: linear-gradient(160deg, rgba(255,255,255,0.045), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+.previewYolo h3 {
     margin-top: 0;
     font-size: 1.05rem;
     color: #d8dde6;
@@ -492,7 +510,7 @@ def main():
             if yolo_result["detections"]:
                 st.markdown("<br>", unsafe_allow_html=True)
                 render_html(
-                    "<div class='card'><h3>Bounding Box dari YOLO</h3></div>"
+                    "<div class='previewYolo'><h3>Bounding Box dari YOLO</h3></div>"
                 )
                 st.image(
                     yolo_result["annotated_image"],
